@@ -27,6 +27,18 @@ export class CourseListComponent {
         });
     }
 
+    deleteById(courseId: number): void {
+        this.courseService.deleteById(courseId).subscribe({
+            next: () => {
+                console.log("Deleted");
+                this.retrieveAll();
+            },
+            error: err => {
+                console.log(err);
+            }
+        });
+    }
+
     set filter(value: string) {
         this._filterBy = value;
         this.filteredCourses = this._courses.filter((course: Course) => course.name.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1);
